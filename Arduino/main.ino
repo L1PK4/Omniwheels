@@ -9,9 +9,6 @@
 #define rIN3 8
 #define rIN4 9
 
-#define MIN_PWR -1000
-#define MAX_PWR +1000
-
 
 struct Vector
 {
