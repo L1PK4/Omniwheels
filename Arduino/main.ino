@@ -90,6 +90,7 @@ void rotate(bool dir)
 }
 Vector vec = new Vector();
 String command, x[2];
+int i;
 
 void loop() {
   if (Serial.available())
@@ -97,12 +98,8 @@ void loop() {
     command = Serial.readStringUntil('\n');
     if(command[0] == 'L')
     {
-      for(int i = 2, j = 0; i < command.length(); i++ )
-      {
-        if (command[i] == ' ') j = 1;
-        else x[j] += command[i];
-      }
-      vec.set_coordinates(x[0].toInt(),x[1].toInt());
+      for(i = 2;command[i] != ' ';i++)x[0] += command[i];
+      for(;i < command.length();i++)x[1] += command[i];
       start_moving(vec);
     }
     else if (command[0] == 'R')
