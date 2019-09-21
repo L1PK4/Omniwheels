@@ -87,44 +87,25 @@ void rotate(bool dir)
     setwheelspeed(2,200 * (dir?1:-1));
     setwheelspeed(3,200 * (!dir?1:-1));
 }
+
 Vector vec;
 String command, x[2];
 int i;
 
 void loop() {
-  // if (Serial.available())
-  // {
-  //   command = Serial.readStringUntil('\n');
-  //   if(command[0] == 'L')
-  //   {
-  //     for(i = 2;command[i] != ' ';i++)x[0] += command[i];
-  //     for(;i < command.length();i++)x[1] += command[i];
-  //     start_moving(vec);
-  //   }
-  //   else if (command[0] == 'R')
-  //   {
-  //     rotate(command[2]);
-  //   }
-    
-  // }
-
-
-  delay(800);
-  rotate(1);
-  delay(500);
-  vec.set_coordinates(0,0);
-  start_moving(vec);
-
-  // vec.set_coordinates(0,255);
-  // start_moving(vec);
-  // delay(800);
-  // vec.set_coordinates(255,0);
-  // start_moving(vec);
-  // delay(800);
-  // vec.set_coordinates(0,-255);
-  // start_moving(vec);
-  // delay(800);
-  // vec.set_coordinates(-255,0);
-  // start_moving(vec);
-  // delay(800);
+  if (Serial.available())
+  {
+    command = Serial.readStringUntil('\n');
+    if(command[0] == 'L')
+    {
+      for(i = 2;command[i] != ' ';i++)x[0] += command[i];
+      for(;i < command.length();i++)x[1] += command[i];
+      vec.set_coordinates(x[0].toInt(), x[1].toInt());
+      start_moving(vec);
+    }
+    else if (command[0] == 'R')
+    {
+      rotate(String(command[2]).toInt());
+    } 
+  }
 }
